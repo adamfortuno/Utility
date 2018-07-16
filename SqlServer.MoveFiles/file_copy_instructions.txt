@@ -1,0 +1,2 @@
+Source,Target
+"\\foo\d$\MSSQL\Backup\thing*.bak","\\bar\f$"

@@ -1,0 +1,3 @@
+dtutil /SQL "\foo\bar\move_sales_data" /SourceS "<ServerNameSource>" /Copy SQL;"\foo\bar\move_sales_data" /DestS "<ServerNameDestination>"
+dtutil /SQL "\foo\bar\move_inventory_data" /SourceS "<ServerNameSource>" /Copy SQL;"\foo\bar\move_inventory_data" /DestS "<ServerNameDestination>"
+dtutil /SQL "\foo\bar\move_store_data" /SourceS "<ServerNameSource>" /Copy SQL;"\foo\bar\move_store_data" /DestS "<ServerNameDestination>"

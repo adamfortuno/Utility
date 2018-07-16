@@ -1,0 +1,22 @@
+## Loading up the SMO assembly
+[Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.Smo')
+
+## Creating an instance object
+$instance = New-Object –TypeName 'Microsoft.SqlServer.Management.Smo.Server' –ArgumentList $(hostname)
+
+$SqlLogin = [Microsoft.SqlServer.Management.Smo.LoginType]::SqlLogin
+$NoLogin = [Microsoft.SqlServer.Management.Smo.UserType]::NoLogin
+
+## Iterating over each database. For each database, the script picks out logins that are:
+## SQL Logins, not system users, 
+Foreach ($database in $instance.databases) {
+	Foreach ($user in $database.users) {
+		If ($user.LoginType -eq $SqlLogin -and $user.IsSystemObject -eq $False -and $user.UserType -eq $NoLogin) {
+			$user | select parent, name, LoginType, IsSystemObject, UserType
+		}
+	}
+}
+
+EnumObjectPermissions
+EnumOwnedObjects
+EnumRoles
