@@ -21,7 +21,18 @@ $occurrences = @{}
 
 ##Record the number of e-mails with a given sender
 foreach ($note in $inbox.items) {
-    $occurrences[$note.SenderEmailAddress]++
+    $email_address_common_name = '/CN='
+    $email_address_organization = '/O='
+    
+    if ( $note.SenderEmailAddress.StartsWith($email_address_organization) ) {
+        $position = $note.SenderEmailAddress.LastIndexOf($email_address_common_name)
+            $position += $email_address_common_name.Length
+            $email_address = $note.SenderEmailAddress.Substring($position)
+    } else {
+        $email_address = $note.SenderEmailAddress
+    }
+
+    $occurrences[$email_address]++
 }
 
 ##Return the list of senders by number of e-mails received
